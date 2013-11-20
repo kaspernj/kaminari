@@ -92,12 +92,11 @@ module Kaminari
         'entry'
       else
         if collection.respond_to? :model  # DataMapper
-          collection.model.model_name.human.downcase
+          collection.model.model_name.human(:count => collection.total_count).downcase
         else  # AR
-          collection.model_name.human.downcase
+          collection.model_name.human(:count => collection.total_count).downcase
         end
       end
-      entry_name = entry_name.pluralize unless collection.total_count == 1
 
       count_formatted = number_with_delimiter(collection.total_count)
 
